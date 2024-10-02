@@ -5,16 +5,19 @@ Solve Pascal's Triangle
 
 
 def fact(n):
+    """ calculate factorial """
     if (n == 0):
         return 1
     return n * fact(n - 1)
 
 
 def Combinations(n, r):
+    """ return nCr """
     return int(fact(n) / (fact(n - r) * fact(r)))
 
 
 def pascal_triangle(n):
+    """ generate first n rows of pascal's triangle """
     final_result = []
     if n <= 0:
         return final_result
