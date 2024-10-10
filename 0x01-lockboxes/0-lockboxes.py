@@ -9,14 +9,12 @@ def canUnlockAll(boxes):
     queue = [0]
 
     while (queue):
-        box = queue.pop(0)
+        box = queue.pop()
         if box > len(boxes):
             continue
         while (boxes[box]):
-            element = boxes[box].pop(0)
+            element = boxes[box].pop()
             unlocked_boxes.add(element)
             queue.append(element)
 
-    if (len(boxes) == len(unlocked_boxes)):
-        return True
-    return False
+    return len(boxes) == len(unlocked_boxes)
