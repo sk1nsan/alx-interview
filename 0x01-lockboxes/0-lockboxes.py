@@ -16,9 +16,4 @@ def canUnlockAll(boxes):
             element = boxes[box].pop(0)
             unlocked_boxes.add(element)
             queue.append(element)
-
-    for i in range(len(boxes)):
-        if (i in unlocked_boxes):
-            continue
-        return False
-    return True
+    return {x for x in range(len(boxes))} == unlocked_boxes
