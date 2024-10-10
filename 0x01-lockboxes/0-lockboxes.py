@@ -19,4 +19,4 @@ def canUnlockAll(boxes):
             unlocked_boxes.add(key)
             queue.append(key)
 
-    return len(boxes) == len(unlocked_boxes)
+    return {x for x in range(len(boxes))} == unlocked_boxes
