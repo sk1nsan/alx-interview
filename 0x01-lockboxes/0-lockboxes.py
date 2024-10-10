@@ -1,16 +1,18 @@
 #!/usr/bin/python3
 
 """ Lockboxes """
+from collections import deque
 
 
 def canUnlockAll(boxes):
     """ Lockboxes """
     unlocked_boxes = {0}
-    queue = [0]
+    queue = deque()
+    queue.append(0)
 
     while (queue):
-        box = queue.pop()
-        if box > len(boxes):
+        box = queue.popleft()
+        if box >= len(boxes):
             continue
         while (boxes[box]):
             element = boxes[box].pop()
