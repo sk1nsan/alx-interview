@@ -8,6 +8,9 @@ def canUnlockAll(boxes):
     unlocked_boxes = {0}
     queue = [0]
 
+    if not boxes:
+        return False
+
     while (queue):
         box = queue.pop(0)
         if box > len(boxes) - 1:
