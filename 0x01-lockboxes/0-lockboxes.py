@@ -10,6 +10,8 @@ def canUnlockAll(boxes):
 
     while (queue):
         box = queue.pop(0)
+        if box > len(boxes) - 1:
+            continue
         while (boxes[box]):
             element = boxes[box].pop(0)
             unlocked_boxes.add(element)
