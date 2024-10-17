@@ -26,8 +26,10 @@ def prime_decomp(n):
 
 def minOperations(n):
     """ calculate Minimum Operations """
-    primes = prime_decomp(n)
     result = 0
+    if n <= 0:
+        return result
+    primes = prime_decomp(n)
     for prime in primes:
         result += primes[prime] * prime
     return result
