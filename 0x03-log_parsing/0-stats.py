@@ -4,7 +4,6 @@
 
 import sys
 import re
-from dateutil.parser import parse
 import signal
 
 total_size = 0
@@ -20,27 +19,21 @@ status_code = {"200": 0,
 
 def parse_line(line):
     """ parses the line """
+    """ 2024-10-24 17:45:35.904169 """
     pattern = re.compile(r"""
     ^
     \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}
     \s-\s
-    \[(.*)\]
+    \[\d+-\d+-\d+\s\d+:\d+:\d+\.\d+\]
     \s"GET\s/ projects/260\sHTTP/1\.1"
     \s(\d{1,3})
     \s(\d+)
     $
 """, re.VERBOSE)
-
-    return pattern.search(line).groups()
-
-
-def is_date(date):
-    """ checkes if input is a valid date """
-    try:
-        parse(date, fuzzy=False)
-        return True
-    except ValueError:
-        return False
+    match = pattern.search(line)
+    if match:
+        return match.groups()
+    return None
 
 
 def signal_handler(sig, frame):
@@ -57,9 +50,7 @@ if __name__ == '__main__':
         for i in range(10):
             parsed_line = parse_line(line)
             if parsed_line:
-                date, code, size = parsed_line
-                if not is_date(date):
-                    continue
+                code, size = parsed_line
                 if code not in status_code:
                     continue
                 status_code[code] += 1
