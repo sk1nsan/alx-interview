@@ -18,7 +18,6 @@ status_code = {"200": 0,
 
 def parse_line(line):
     """ parses the line """
-    """ 2024-10-24 17:45:35.904169 """
     pattern = re.compile(r"""
     ^
     \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}
@@ -56,5 +55,6 @@ if __name__ == '__main__':
                 else:
                     continue
             print_output()
+        print_output()
     except KeyboardInterrupt:
         print_output()
