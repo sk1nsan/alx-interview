@@ -4,7 +4,6 @@
 
 import sys
 import re
-import signal
 
 total_size = 0
 status_code = {"200": 0,
@@ -36,8 +35,7 @@ def parse_line(line):
     return None
 
 
-def signal_handler(sig, frame):
-    """ handles signal error """
+def print_output():
     print(f"File size: {total_size}")
     for key, value in status_code.items():
         if value:
@@ -45,19 +43,18 @@ def signal_handler(sig, frame):
 
 
 if __name__ == '__main__':
-    signal.signal(signal.SIGINT, signal_handler)
-    for line in sys.stdin:
-        for i in range(10):
-            parsed_line = parse_line(line)
-            if parsed_line:
-                code, size = parsed_line
-                if code not in status_code:
+    try:
+        for line in sys.stdin:
+            for i in range(10):
+                parsed_line = parse_line(line)
+                if parsed_line:
+                    code, size = parsed_line
+                    if code not in status_code:
+                        continue
+                    status_code[code] += 1
+                    total_size += int(size)
+                else:
                     continue
-                status_code[code] += 1
-                total_size += int(size)
-            else:
-                continue
-        print(f"File size: {total_size}")
-        for key, value in status_code.items():
-            if value:
-                print(f"{key}: {value}")
+            print_output()
+    except KeyboardInterrupt:
+        print_output()
