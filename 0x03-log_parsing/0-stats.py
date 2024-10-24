@@ -6,6 +6,7 @@ import sys
 import re
 
 total_size = 0
+count = 0
 status_code = {"200": 0,
                "301": 0,
                "400": 0,
@@ -44,17 +45,18 @@ def print_output():
 if __name__ == '__main__':
     try:
         for line in sys.stdin:
-            for i in range(10):
-                parsed_line = parse_line(line)
-                if parsed_line:
-                    code, size = parsed_line
-                    if code not in status_code:
-                        continue
-                    status_code[code] += 1
-                    total_size += int(size)
-                else:
+            count += 1
+            parsed_line = parse_line(line)
+            if parsed_line:
+                code, size = parsed_line
+                if code not in status_code:
                     continue
-            print_output()
+                status_code[code] += 1
+                total_size += int(size)
+            else:
+                continue
+            if count % 10 == 0:
+                print_output()
         print_output()
     except KeyboardInterrupt:
         print_output()
