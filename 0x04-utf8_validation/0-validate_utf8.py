@@ -7,8 +7,6 @@ def validUTF8(data):
     """ UTF-8 Validation """
     bytes_remaining = 0
     for byte in data:
-        if byte > 255:
-            return False
         if bytes_remaining:
             if byte & 192 != 128:
                 return False
@@ -19,7 +17,7 @@ def validUTF8(data):
         if byte & 224 == 192:
             bytes_remaining = 1
             continue
-        if byte & 240 == 242:
+        if byte & 240 == 224:
             bytes_remaining = 2
             continue
         if byte & 248 == 240:
