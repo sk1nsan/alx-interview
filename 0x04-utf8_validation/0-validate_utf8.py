@@ -13,6 +13,7 @@ def validUTF8(data):
             if byte & 192 != 128:
                 return False
             bytes_remaining -= 1
+            continue
         if not byte & 128:
             continue
         if byte & 224 == 192:
