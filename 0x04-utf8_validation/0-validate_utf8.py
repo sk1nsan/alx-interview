@@ -23,4 +23,6 @@ def validUTF8(data):
             bytes_remaining = 3
             continue
         return False
+    if bytes_remaining:
+        return False
     return True
