@@ -16,7 +16,7 @@ def makeChange(coins, total):
             result += total // j
             total %= j
         else:
-            break
+            continue
     if total != 0:
         return -1
     return result
