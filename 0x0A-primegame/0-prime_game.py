@@ -6,10 +6,7 @@ def isWinner(x, nums):
     """returns the winner of the game"""
     if x <= 0 or nums is None:
         return None
-    if x != len(nums):
-        return None
-    mariaWinsCount = 0
-    benWinsCount = 0
+    mariaWinsCount = benWinsCount = 0
 
     for num in nums:
         primes = [n for n in range(1, num + 1) if is_prime(n)]
