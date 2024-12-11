@@ -12,28 +12,10 @@ def isWinner(x, nums):
     benWinsCount = 0
 
     for num in nums:
-        roundsSet = list(range(1, num + 1))
         primes = [n for n in range(1, num + 1) if is_prime(n)]
-        if not primes:
-            benWinsCount += 1
-            continue
-
-        isMariaTurns = True
-
-        while True:
-            if not primes:
-                if isMariaTurns:
-                    benWinsCount += 1
-                else:
-                    mariaWinsCount += 1
-                break
-
-            smallestPrime = primes.pop(0)
-            roundsSet.remove(smallestPrime)
-
-            roundsSet = [x for x in roundsSet if x % smallestPrime != 0]
-
-        isMariaTurns = not isMariaTurns
+        primes_count = len(primes)
+        benWinsCount += primes_count % 2 == 0
+        mariaWinsCount += primes_count % 2 == 1
 
     if mariaWinsCount > benWinsCount:
         return "Maria"
